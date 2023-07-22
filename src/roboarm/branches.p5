@@ -1,0 +1,45 @@
+function setup() {
+  createCanvas(400, 400);
+    frameRate(1); // Set the frame rate to 30 frames per second
+
+}
+
+function draw() {
+  background(220);
+  
+  translate(width / 2, height); // Move the origin to the bottom center
+  
+  // Draw the tree starting from the bottom
+  drawBranch(0, 0, 100, -PI/2);
+}
+
+function drawBranch(x, y, length, angle) {
+  if (length < 5) {
+    return; // Stop drawing if the branch is too short
+  }
+  
+  let branchAngle = random(-PI/4, PI/4); // Randomly determine the angle of the branch
+  let branchAngle2 = random(-PI/4, PI/4); // Randomly determine the angle of the branch
+  let chagnefactor = random(0.5, 1); // Randomly determine the angle of the branch
+  let should = random(0.0, 1); // Randomly determine the angle of the branch
+  let should2 = random(0.0, 1); // Randomly determine the angle of the branch
+  
+  let endX = x + length * cos(angle); // Calculate the end point of the branch
+  let endY = y + length * sin(angle);
+  
+  stroke(5);
+    fill(139, 69, 19); // Brown color for the inside
+  triangle(x, y - 3, endX, endY, x, y + 3); // Draw the branch using a triangle
+
+  //line(x, y, endX, endY); // Draw the branch
+  
+  // Recursive calls to draw additional branches
+
+  if (should > 0.2) {
+    drawBranch(endX, endY, length * chagnefactor, angle + branchAngle);
+  }
+  if (should2 < 0.8) {
+
+    drawBranch(endX, endY, length * chagnefactor, angle - branchAngle2);
+  }
+}
